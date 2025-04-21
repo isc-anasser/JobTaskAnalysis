@@ -1,0 +1,28 @@
+<h2>{{page().title}}</h2>
+
+@for (stuff of page().content; track $index) {
+@switch (stuff.type) {
+    @case ("info") {
+        <cert-info [htmlInput]="stuff.html"></cert-info>
+    }
+    @case ("comment") {
+        <cert-certcomment [commentObj]="stuff"></cert-certcomment>
+    }
+    @case ("MC") {
+        <cert-multiplechoice [question]="stuff"></cert-multiplechoice>
+    }
+    @case ("KSAGroup") {
+
+    }
+    @case ("KSA") {
+
+    }
+    @default {
+        <p>Unknown Component Passed</p>
+    }
+}
+}
+
+<footer>
+    <p>Page Number: {{pageNum()}}</p>
+</footer>

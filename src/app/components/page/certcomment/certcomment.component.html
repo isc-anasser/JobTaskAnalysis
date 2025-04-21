@@ -1,0 +1,5 @@
+<fieldset>
+    <legend tabindex="0">{{commentObj().text}}</legend>
+    <textarea (blur)="recordComment($event)" name="{{commentObj().id}}" id="{{commentObj().id}}" 
+    rows="3" cols="75" spellcheck="true">{{commentObj().response}}</textarea>
+</fieldset>

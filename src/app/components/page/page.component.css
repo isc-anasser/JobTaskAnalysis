@@ -1,0 +1,13 @@
+:host {
+    /* view-transition-name: page; */
+}
+
+cert-multiplechoice {
+    display: block;
+    margin-block: 1rem;
+}
+
+footer {
+    display: flex;
+    flex-direction: row-reverse;
+}

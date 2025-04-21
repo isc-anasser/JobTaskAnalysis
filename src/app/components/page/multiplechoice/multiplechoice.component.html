@@ -1,0 +1,27 @@
+<fieldset class="mc-container">
+    <legend tabindex="0">{{question().text}}</legend>
+    <div class="radio-btn">
+        @for (alternative of question().alternatives; track $index) {
+        <div class="choice-container" tabindex="0" (keyup.enter)="selectInput($event)">
+            <div class="radio-container">
+                <input (change)="recordResponse($event)" type="radio" name="{{question().id}}" value="{{alternative}}"
+                    id="{{question().id + '-' + $index}}" [checked]="question().response === alternative"
+                    required tabindex="-1">
+                <div class="radio-background">
+                    <div class="outer-circle"></div>
+                    <div class="inner-circle"></div>
+                </div>
+            </div>
+            <label for="{{question().id + '-' + $index}}">
+                {{alternative}}
+            </label>
+        </div>
+        }
+        @if (question().hasComment) {
+            <input (blur)="recordComment($event)" 
+                type="text" name="{{question().id}}" id="{{question().id + '- comment'}}" 
+                [value]="this.question().comment ?? ''" maxlength="500" placeholder="Please Add a Comment Here"
+                [required]="requireComment()">
+        }
+    </div>
+</fieldset>

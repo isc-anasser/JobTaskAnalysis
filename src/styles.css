@@ -1,1 +1,118 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    interpolate-size: allow-keywords;
+
+    --cert-primary-color: #323694;
+    --cert-bg-color: #fff;
+    --cert-btn-bg-color: #323694;
+    --cert-btn-color: #fff;
+    --cert-font-color: #000;
+    --cert-radio-border-color: #000;
+    --cert-error-color: #ff0011;
+    --cert-route-active: red;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cert-primary-color: #fff;
+        --cert-bg-color: #333;
+        --cert-btn-bg-color: #fff;
+        --cert-btn-color: #323694;
+        --cert-font-color: #fff;
+        --cert-radio-border-color: #fff;
+        --cert-error-color: #ff5762;
+        --cert-route-active: red;
+    }
+}
+
+html,
+body {
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Noto Sans", sans-serif;
+    background-color: #eee;
+}
+
+p,
+li,
+label {
+    color: var(--cert-font-color);
+    font-size: 1rem;
+    margin: 0;
+}
+
+h2 {
+    color: var(--cert-primary-color);
+    font-weight: 400;
+    margin: 0;
+}
+
+fieldset {
+    &:focus-within {
+        border: 2px solid var(--cert-primary-color);
+    }
+
+    &:has(:user-invalid) {
+        border: 2px solid var(--cert-error-color);
+    }
+}
+
+legend {
+    font-size: 1rem;
+    color: var(--cert-font-color);
+}
+
+textarea {
+    outline-color: var(--cert-primary-color);
+    border: 1px solid #333e48;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-family: inherit;
+}
+
+.btn {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    color: var(--cert-btn-color);
+    background-color: var(--cert-btn-bg-color);
+    border: none;
+    border-radius: 4px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+@keyframes move-out {
+    to {
+        /* transform: translateX(15rem); */
+        opacity: 0;
+    }
+}
+
+@keyframes move-in {
+    from {
+        /* transform: translateX(-15rem); */
+        opacity: 0;
+    }
+}
+
+::view-transition-old(page),
+::view-transition-new(page) {
+    animation-duration: 200ms;
+    /* animation-name: -ua-view-transition-fade-in, move-in; */
+    animation-name: move-in;
+}
+
+::view-transition-old(page) {
+    /* animation-name: -ua-view-transition-fade-out, move-out; */
+    animation-name: move-out;
+}

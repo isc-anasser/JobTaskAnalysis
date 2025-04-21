@@ -1,0 +1,102 @@
+.radio-btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.choice-container {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    gap: 0.25rem;
+    &:has(input[type="radio"]:checked) + input[type="text"] {
+        height: 1rem;
+        opacity: 1;
+    }
+}
+
+input[type="text"] {
+    width: 20rem;
+    height: 0;
+    opacity: 0;
+    margin-inline-start: 2.75rem;
+    font-size: 0.9rem;
+    padding: 0.25rem;
+    transition: height 0.25s ease-out, opacity 0.25s ease-out;
+    transition-behavior: allow-discrete;
+    &:focus {
+        border: 2px solid var(--cert-primary-color);
+    }
+}
+
+@starting-style {
+    input[type="text"] {
+        height: 0;
+        opacity: 0;
+    }
+}
+.radio-container {
+    padding: 0.625rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: inline-block;
+    will-change: opacity, transform, border-color, color;
+    position: relative;
+    cursor: pointer;
+    input[type="radio"] {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        z-index: 1;
+        width: 2.5rem;
+        height: 2.5rem;
+        opacity: 0;
+    }
+    input:checked + .radio-background {
+        .inner-circle {
+            scale: 0.5;
+        }
+        &::before {
+            opacity: 0.12;
+            scale: 2;
+        }
+    }
+    .radio-background {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        width: 1.25rem;
+        height: 1.25rem;
+        .outer-circle, .inner-circle {
+            position: absolute;
+            box-sizing: border-box;
+            inset-block-start: 0;
+            inset-inline-start: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--cert-radio-border-color);
+            border-radius: 50%;
+            
+        }
+        .inner-circle {
+            scale: 0;
+            background-color: var(--cert-primary-color);
+            transition: scale 0.1s cubic-bezier(0, 0, 0.2, 1);
+        }
+        &::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            background-color: var(--cert-primary-color);
+            transition: opacity 0.1s cubic-bezier(0, 0, 0.2, 1), scale 0.1s cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+}
+

@@ -1,0 +1,51 @@
+:host {
+    display: block;
+
+}
+
+svg {
+    display: block;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    color-scheme: only light;
+
+    .cls-1,
+    .cls-2 {
+        fill: light-dark(#fff, #fff)
+    }
+
+    .cls-3 {
+        fill: light-dark(#00b4ae, #00b4ae)
+    }
+
+    .cls-4 {
+        fill: light-dark(#00c496, #00c496)
+    }
+
+    /* Lower L of the inner Logo */
+    .cls-5 {
+        fill: light-dark(#323694, #323694)
+    }
+
+    /* Inner rings */
+    .cls-2 {
+        stroke: light-dark(#29398a, #29398a);
+        stroke-miterlimit: 10;
+        stroke-width: 2px
+    }
+
+    /* Outer ring */
+    .cls-6 {
+        fill: light-dark(#29398a, #29398a)
+    }
+
+    
+}
+
+h1 {
+    margin-block-start: 3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--cert-primary-color);
+}
