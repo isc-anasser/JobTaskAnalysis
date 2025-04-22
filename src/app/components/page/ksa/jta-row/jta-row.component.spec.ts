@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JtaComponent } from './jta.component';
+import { JtaRowComponent } from './jta-row.component';
 
-describe('JtaComponent', () => {
-  let component: JtaComponent;
-  let fixture: ComponentFixture<JtaComponent>;
+describe('JtaRowComponent', () => {
+  let component: JtaRowComponent;
+  let fixture: ComponentFixture<JtaRowComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [JtaComponent]
+      imports: [JtaRowComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(JtaComponent);
+    fixture = TestBed.createComponent(JtaRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

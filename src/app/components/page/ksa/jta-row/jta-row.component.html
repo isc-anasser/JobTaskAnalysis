@@ -1,0 +1,45 @@
+<td>{{targetItem().text}}</td>
+<td>
+    @for (option of applicabilityOptions; track $index) {
+        <label for="{{option}}">
+            <input type="radio" name="applicability" 
+            id="{{option}}" value="{{option}}"
+            [checked]="targetItem().scores.applicability === option"
+            (change)="recordResponse($event, 'applicability')">
+            {{option}}
+        </label>
+    }
+</td>
+<td>
+    @for (option of difficultyOptions; track $index) {
+        <label for="{{option}}">
+            <input type="radio" name="difficulty" 
+            id="{{option}}" value="{{$index + 1}}"
+            [checked]="targetItem().scores.difficulty === ($index+1).toString()"
+            (change)="recordResponse($event, 'difficulty')">
+            {{option}}
+        </label>
+    }
+</td>
+<td>
+    @for (option of importanceOptions; track $index) {
+        <label for="{{option}}">
+            <input type="radio" name="importance" 
+            id="{{option}}" value="{{$index + 1}}"
+            [checked]="targetItem().scores.importance === ($index+1).toString()"
+            (change)="recordResponse($event, 'importance')">
+            {{option}}
+        </label>
+    }
+</td>
+<td>
+    @for (option of frequencyOptions; track $index) {
+        <label for="{{option}}">
+            <input type="radio" name="frequency" 
+            id="{{option}}" value="{{$index + 1}}"
+            [checked]="targetItem().scores.frequency === ($index+1).toString()"
+            (change)="recordResponse($event, 'frequency')">
+            {{option}}
+        </label>
+    }
+</td>

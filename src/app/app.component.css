@@ -1,14 +1,15 @@
 :host {
-    display: block;
-    margin-inline: 1rem;
+
 }
 
 main {
-    max-width: 62.5rem;
+    width: 62.5rem;
+    display: block;
     padding-inline: 1rem;
     margin: 0 auto;
     background-color: var(--cert-bg-color);
     min-height: 100vh;
+    
 }
 
 nav {

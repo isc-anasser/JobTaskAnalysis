@@ -57,7 +57,7 @@ export type KSA = {
 export type TargetItem = {
     id: string,
     text: string,
-    scores?: JTAScores
+    scores: JTAScores
 };
 
 export type JTAScores = {

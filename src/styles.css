@@ -38,17 +38,18 @@ body {
     margin: 0;
     font-family: "Noto Sans", sans-serif;
     background-color: #eee;
+    scrollbar-gutter: stable both-edges;
 }
 
 p,
 li,
-label {
+label, th, td {
     color: var(--cert-font-color);
     font-size: 1rem;
     margin: 0;
 }
 
-h2 {
+h2, h3 {
     color: var(--cert-primary-color);
     font-weight: 400;
     margin: 0;

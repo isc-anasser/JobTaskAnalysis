@@ -6,7 +6,7 @@
     <router-outlet></router-outlet>
 
     <nav>
-        @for (navObj of pages; track $index) {
+        @for (navObj of navLinks; track $index) {
         <a class="btn" [routerLink]="navObj.path + navObj.pageIndex" routerLinkActive="active" ariaCurrentWhenActive="page">{{navObj.pageIndex}}</a>
         }
     </nav>

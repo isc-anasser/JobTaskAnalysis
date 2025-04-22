@@ -12,10 +12,10 @@
         <cert-multiplechoice [question]="stuff"></cert-multiplechoice>
     }
     @case ("KSAGroup") {
-
+        <cert-ksagroup [ksaGroupObj]="stuff"></cert-ksagroup>
     }
     @case ("KSA") {
-
+        <cert-ksa [ksaObj]="stuff"></cert-ksa>
     }
     @default {
         <p>Unknown Component Passed</p>

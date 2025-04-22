@@ -1,0 +1,37 @@
+<h3>{{ksaObj().id + " " + ksaObj().text}}</h3>
+<p>Tasks:</p>
+<!-- <table>
+    <tr>
+        <th>Topic</th>
+        <th>Applicability</th>
+        <th>Difficulty</th>
+        <th>Importance</th>
+        <th>Frequency</th>
+    </tr>
+    @for (ti of ksaObj().tis; track $index) {
+        <tr>
+            <td>
+                @for (option of applicabilityOptions; track $index) {
+                    <label for="{{ti.id + '-applicability-' + $index}}">
+                        {{option}}
+                        <input type="radio" name="{{ti.id + '-applicability'}}" id="{{ti.id + '-applicability-' + $index}}"
+                            value="{{option}}">
+                    </label>
+                }
+            </td>
+        </tr>
+    }
+</table> -->
+<table>
+    <tr>
+        <th>Topic</th>
+        <th>Applicability</th>
+        <th>Difficulty</th>
+        <th>Importance</th>
+        <th>Frequency</th>
+    </tr>
+    @for (targetItem of ksaObj().tis; track $index) {
+        <tr cert-jta-row [targetItem]="targetItem"></tr>
+    }
+    
+</table>

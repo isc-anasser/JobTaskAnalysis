@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { SurveyContentService } from '../../services/survey-content.service';
 import { CertcommentComponent } from "./certcomment/certcomment.component";
-import { JtaComponent } from "./jta/jta.component";
 import { MultiplechoiceComponent } from "./multiplechoice/multiplechoice.component";
 import { InfoComponent } from "./info/info.component";
+import { KsagroupComponent } from "./ksagroup/ksagroup.component";
+import { KsaComponent } from "./ksa/ksa.component";
 
 @Component({
   selector: 'cert-page',
-  imports: [CertcommentComponent, JtaComponent, MultiplechoiceComponent, InfoComponent],
+  imports: [CertcommentComponent, MultiplechoiceComponent, InfoComponent, KsagroupComponent, KsaComponent],
   templateUrl: './page.component.html',
   styleUrl: './page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -18,6 +19,5 @@ export class PageComponent {
   pageNum = computed(() => this.pageIndex()? this.pageIndex()! : 1)
   contentService = inject(SurveyContentService);
   //This is a computed signal because the content of the page rely on the pageNum signal which can change.
-  page = computed(() => this.contentService.getConfig().pages[this.pageNum() - 1]);
-  
+  page = computed(() => this.contentService.mappedPagesArray[this.pageNum() - 1]);
 }
