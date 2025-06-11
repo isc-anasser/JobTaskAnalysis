@@ -1,0 +1,47 @@
+<div class="question-grid">
+    <p class="question-text">{{savedResponse().text}}</p>
+
+    <div class="choice-column">
+        @for (option of applicabilityOptions; track $index) {
+        <label (keyup.enter)="forwardClick($event)" tabindex="1">
+            <input tabindex="-1" type="radio" name="{{'applicabilityx-' + savedResponse().id}}" value="{{option}}"
+                [checked]="savedResponse().scores.applicability === option"
+                (change)="recordResponse($event, 'applicability')">
+            {{option}}
+        </label>
+        }
+    </div>
+
+    <div class="choice-column reverse">
+        @for (option of difficultyOptions; track $index) {
+        <label (keyup.enter)="forwardClick($event)" tabindex="1" for="{{option+'-'+savedResponse().id}}">
+            <input tabindex="-1" type="radio" name="{{'difficulty-' + savedResponse().id}}" id="{{option+'-'+savedResponse().id}}"
+                value="{{$index + 1}}" [checked]="savedResponse().scores.difficulty === ($index+1).toString()"
+                (change)="recordResponse($event, 'difficulty')">
+            {{option}}
+        </label>
+        }
+    </div>
+
+    <div class="choice-column reverse">
+        @for (option of importanceOptions; track $index) {
+        <label (keyup.enter)="forwardClick($event)" tabindex="1" for="{{option+'-'+savedResponse().id}}">
+            <input tabindex="-1" type="radio" name="{{'importance-' + savedResponse().id}}" id="{{option+'-'+savedResponse().id}}"
+                value="{{$index + 1}}" [checked]="savedResponse().scores.importance === ($index+1).toString()"
+                (change)="recordResponse($event, 'importance')">
+            {{option}}
+        </label>
+        }
+    </div>
+
+    <div class="choice-column reverse">
+        @for (option of frequencyOptions; track $index) {
+        <label (keyup.enter)="forwardClick($event)" tabindex="1" for="{{option+'-'+savedResponse().id}}">
+            <input tabindex="-1" type="radio" name="{{'frequency-' + savedResponse().id}}" id="{{option+'-'+savedResponse().id}}"
+                value="{{$index + 1}}" [checked]="savedResponse().scores.frequency === ($index+1).toString()"
+                (change)="recordResponse($event, 'frequency')">
+            {{option}}
+        </label>
+        }
+    </div>
+</div>

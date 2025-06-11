@@ -1,9 +1,17 @@
-import { ApplicationConfig, provideExperimentalCheckNoChangesForDebug, provideExperimentalZonelessChangeDetection, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
+import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
+import { InMemoryScrollingFeature, InMemoryScrollingOptions, provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 
+const scrollConfig: InMemoryScrollingOptions = {
+  scrollPositionRestoration: 'top',
+  anchorScrolling: 'enabled',
+};
+
+const inMemoryScrollingFeature: InMemoryScrollingFeature =
+  withInMemoryScrolling(scrollConfig);
+
 export const appConfig: ApplicationConfig = {
   // /provideRouter(routes)
-  providers: [provideExperimentalZonelessChangeDetection(), provideRouter(routes, withComponentInputBinding(), withViewTransitions())]
+  providers: [provideZonelessChangeDetection(), provideRouter(routes, withComponentInputBinding(), withViewTransitions(), inMemoryScrollingFeature )]
 };

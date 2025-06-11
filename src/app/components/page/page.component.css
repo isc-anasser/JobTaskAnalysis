@@ -2,7 +2,7 @@
     /* view-transition-name: page; */
 }
 
-cert-multiplechoice {
+cert-multiplechoice, cert-info, cert-certcomment, cert-ksagroup {
     display: block;
     margin-block: 1rem;
 }

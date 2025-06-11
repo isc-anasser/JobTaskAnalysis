@@ -1,27 +1,42 @@
 <fieldset class="mc-container">
-    <legend tabindex="0">{{question().text}}</legend>
+    <legend tabindex="0">{{savedResponse().text}}</legend>
     <div class="radio-btn">
-        @for (alternative of question().alternatives; track $index) {
+        @for (alternative of savedResponse().alternatives; track $index) {
         <div class="choice-container" tabindex="0" (keyup.enter)="selectInput($event)">
             <div class="radio-container">
-                <input (change)="recordResponse($event)" type="radio" name="{{question().id}}" value="{{alternative}}"
-                    id="{{question().id + '-' + $index}}" [checked]="question().response === alternative"
-                    required tabindex="-1">
+                <input (change)="recordResponse($event)" type="radio" name="{{savedResponse().id}}"
+                    value="{{alternative.text}}" id="{{savedResponse().id + '-' + $index}}"
+                    [checked]="savedResponse().response === alternative.text" required tabindex="-1">
+                    <!-- <p>Saved response: {{savedResponse().response}}</p>
+                    <p>Alternative text: {{alternative.text}}</p> -->
                 <div class="radio-background">
                     <div class="outer-circle"></div>
                     <div class="inner-circle"></div>
                 </div>
             </div>
-            <label for="{{question().id + '-' + $index}}">
-                {{alternative}}
+            <label for="{{savedResponse().id + '-' + $index}}">
+                {{alternative.text}}
             </label>
         </div>
         }
-        @if (question().hasComment) {
-            <input (blur)="recordComment($event)" 
-                type="text" name="{{question().id}}" id="{{question().id + '- comment'}}" 
-                [value]="this.question().comment ?? ''" maxlength="500" placeholder="Please Add a Comment Here"
-                [required]="requireComment()">
+        @if (savedResponse().hasComment) {
+        <div class="choice-container" tabindex="0" (keyup.enter)="selectInput($event)">
+            <div class="radio-container">
+                <input (change)="recordResponse($event)" type="radio" name="{{savedResponse().id}}"
+                    value="Other (Please Specifiy)" id="{{savedResponse().id + '-other'}}"
+                    [checked]="savedResponse().response === 'Other (Please Specifiy)'" required tabindex="-1">
+                <div class="radio-background">
+                    <div class="outer-circle"></div>
+                    <div class="inner-circle"></div>
+                </div>
+            </div>
+            <label for="{{savedResponse().id + '-other'}}">
+                Other (Please Specifiy)
+            </label>
+        </div>
+        <input (blur)="recordComment($event)" type="text" name="{{savedResponse().id}}" id="{{savedResponse().id + '- comment'}}"
+            [value]="this.savedResponse().comment ?? ''" maxlength="200" placeholder="Please Add a Comment Here"
+            [required]="requireComment()">
         }
     </div>
 </fieldset>

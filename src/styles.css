@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
     interpolate-size: allow-keywords;
@@ -12,108 +11,146 @@
     --cert-radio-border-color: #000;
     --cert-error-color: #ff0011;
     --cert-route-active: red;
+    --cert-jta-th-bg: #323694;
+    --cert-selected-border: #323694;
+    --cert-selected-bg: #32359425;
+    --cert-unselected-bg: #f9f9f9;
+    --cert-unselected-border: #ccc;
+    --cert-highlight-color: #323694;
+    --cert-jta-header: #fff;
+    --cert-success-submission: #28a745;
+    --cert-error-submission: #dc3545;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --cert-primary-color: #fff;
-        --cert-bg-color: #333;
+        --cert-bg-color: rgb(34, 34, 34);
         --cert-btn-bg-color: #fff;
         --cert-btn-color: #323694;
         --cert-font-color: #fff;
-        --cert-radio-border-color: #fff;
+        --cert-radio-border-color: #00c496;
         --cert-error-color: #ff5762;
         --cert-route-active: red;
+        --cert-jta-th-bg: #323694;
+        --cert-selected-border: #fff;
+        --cert-selected-bg: #00c496;
+        --cert-unselected-bg: #424242;
+        --cert-unselected-border: #fff;
+        --cert-highlight-color: #00c496;
+        --cert-jta-header: #fff;
+        --cert-success-submission: #34d399;
+        --cert-error-submission: #f87171;
     }
 }
 
-html,
-body {
-    height: 100%;
-    overflow: auto;
-    box-sizing: border-box;
-}
+@layer normal, important;
 
-body {
-    margin: 0;
-    font-family: "Noto Sans", sans-serif;
-    background-color: #eee;
-    scrollbar-gutter: stable both-edges;
-}
+@layer normal {
 
-p,
-li,
-label, th, td {
-    color: var(--cert-font-color);
-    font-size: 1rem;
-    margin: 0;
-}
-
-h2, h3 {
-    color: var(--cert-primary-color);
-    font-weight: 400;
-    margin: 0;
-}
-
-fieldset {
-    &:focus-within {
-        border: 2px solid var(--cert-primary-color);
+    html,
+    body {
+        height: 100%;
+        overflow: auto;
+        box-sizing: border-box;
+        font-size: 1rem;
     }
 
-    &:has(:user-invalid) {
-        border: 2px solid var(--cert-error-color);
+    body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+        background-color: var(--cert-bg-color);
+        scrollbar-gutter: stable both-edges;
     }
-}
 
-legend {
-    font-size: 1rem;
-    color: var(--cert-font-color);
-}
-
-textarea {
-    outline-color: var(--cert-primary-color);
-    border: 1px solid #333e48;
-    font-size: 1rem;
-    padding: 0.5rem;
-    font-family: inherit;
-}
-
-.btn {
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 0.25rem 0.5rem;
-    color: var(--cert-btn-color);
-    background-color: var(--cert-btn-bg-color);
-    border: none;
-    border-radius: 4px;
-
-    &:hover {
-        opacity: 0.8;
+    p,
+    li,
+    label,
+    th,
+    td,
+    div {
+        color: var(--cert-font-color);
+        font-size: inherit;
+        margin: 0;
     }
-}
 
-@keyframes move-out {
-    to {
-        /* transform: translateX(15rem); */
-        opacity: 0;
+    h2,
+    h3 {
+        color: var(--cert-primary-color);
+        font-weight: 400;
+        margin: 0;
     }
-}
 
-@keyframes move-in {
-    from {
-        /* transform: translateX(-15rem); */
-        opacity: 0;
+    fieldset {
+        min-width: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        &:focus-within {
+            border: 2px solid var(--cert-primary-color);
+        }
+
+        &:has(:user-invalid) {
+            border: 2px solid var(--cert-error-color);
+        }
     }
-}
 
-::view-transition-old(page),
-::view-transition-new(page) {
-    animation-duration: 200ms;
-    /* animation-name: -ua-view-transition-fade-in, move-in; */
-    animation-name: move-in;
-}
+    legend {
+        font-size: 1rem;
+        color: var(--cert-font-color);
+    }
 
-::view-transition-old(page) {
-    /* animation-name: -ua-view-transition-fade-out, move-out; */
-    animation-name: move-out;
+    textarea {
+        min-width: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        outline-color: var(--cert-primary-color);
+        border: 1px solid #333e48;
+        font-size: 1rem;
+        padding: 0.5rem;
+        font-family: inherit;
+    }
+
+    .btn {
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+        color: var(--cert-btn-color);
+        background-color: var(--cert-btn-bg-color);
+        border: none;
+        border-radius: 4px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    @keyframes move-out {
+        to {
+            /* transform: translateX(15rem); */
+            opacity: 0;
+        }
+    }
+
+    @keyframes move-in {
+        from {
+            /* transform: translateX(-15rem); */
+            opacity: 0;
+        }
+    }
+
+    ::view-transition-old(page),
+    ::view-transition-new(page) {
+        animation-duration: 200ms;
+        /* animation-name: -ua-view-transition-fade-in, move-in; */
+        animation-name: move-in;
+    }
+
+    ::view-transition-old(page) {
+        /* animation-name: -ua-view-transition-fade-out, move-out; */
+        animation-name: move-out;
+    }
 }

@@ -1,5 +1,5 @@
 <fieldset>
-    <legend tabindex="0">Please include any missing content for this topics: {{ksaGroupObj().text}}</legend>
-    <textarea (blur)="recordComment($event)" name="{{ksaGroupObj().id}}" id="{{ksaGroupObj().id}}" 
-    rows="3" cols="75" spellcheck="true">{{ksaGroupObj().comment}}</textarea>
+    <legend tabindex="0">Please include any missing content for this topics ({{characterLimit}} character limit):</legend>
+    <textarea (blur)="recordComment($event)" name="{{savedResponse().id}}" id="{{savedResponse().id}}" 
+    rows="3" cols="75" spellcheck="true" [maxLength]="characterLimit">{{savedResponse().comment}}</textarea>
 </fieldset>

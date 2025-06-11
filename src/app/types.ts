@@ -1,12 +1,15 @@
 export type SurveyContent = {
     examName: string,
     url: string, //URL of the JTA, so /ext/jta/survey/**url**
+    // dashboardUrl: string,
+    // startDate: string,
+    // endDate: string,
     pages: Page[]
 };
 export type Page = {
     title: string, //We don't need this
     url?: string, //Path to get to the particular page, we may not need this.
-    pageNum?: number, //We don't need this
+    pageNum: number, //This is used to track page components for addition or deletion
     content: Content[] 
 };
 
@@ -14,6 +17,7 @@ export type Content = CertText | MultipleChoice | CertComment | JTA | KSAGroup |
 
 export type CertText = {
     type: "info",
+    id: string,
     html: string
 };
 
@@ -21,11 +25,16 @@ export type MultipleChoice = {
     type: "MC"
     id: string,
     text: string,
-    alternatives: string[],
+    alternatives: Alternative[],
     hasComment: boolean,
     response?: string,
     comment?: string
 };
+
+export type Alternative = {
+    id: number,
+    text: string
+}
 
 export type CertComment = {
     type: "comment",
@@ -36,6 +45,7 @@ export type CertComment = {
 
 export type JTA = {
     type: "JTA",
+    id: "JTA",
     ksaGroups: KSAGroup[]
 };
 
@@ -65,4 +75,13 @@ export type JTAScores = {
     importance: string,
     difficulty: string,
     frequency: string
+};
+
+type ResponseContent = CertComment | MultipleChoice | KSAGroup | TargetItem
+
+export type Responses = {
+    jta: Record<string, ResponseContent>,
+    mc: Record<string, ResponseContent>,
+    comment: Record<string, ResponseContent>
+    ksaComment: Record<string, ResponseContent>
 };

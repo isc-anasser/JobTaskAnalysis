@@ -1,4 +1,9 @@
-textarea {
-    display: block;
-    margin-block: 1rem;
+@layer normal, important;
+
+@layer normal {
+    textarea {
+        min-width: 0;
+        display: block;
+        margin-block: 1rem;
+    }
 }

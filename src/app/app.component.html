@@ -1,13 +1,35 @@
 <main>
     <cert-logoandtitle [surveyTitle]="examName()"></cert-logoandtitle>
 
-
-
+    @if (showSubmissionResult()) {
+    <div class="submission-result" >
+        @if (submissionResultObj.isSuccess) {
+            <h2 class="success">Success</h2>
+        }@else {
+            <h2 class="error">Error Encountered</h2>
+        }
+        <p>{{submissionResultObj.text}}</p>
+    </div>
+    }@else if (showSubmissionLoadingScreen()) {
+    <div class="loader-container">
+        <div class="loader">
+        </div>
+    </div>
+    }@else {
     <router-outlet></router-outlet>
+
+    <div class="submit">
+        @if(currentPage()===navLinks.length) {
+        <button (click)="submitSurvey()">Submit</button>
+        }
+    </div>
 
     <nav>
         @for (navObj of navLinks; track $index) {
-        <a class="btn" [routerLink]="navObj.path + navObj.pageIndex" routerLinkActive="active" ariaCurrentWhenActive="page">{{navObj.pageIndex}}</a>
+        <a class="btn" [routerLink]="navObj.path + navObj.pageIndex" routerLinkActive="active"
+            ariaCurrentWhenActive="page">{{navObj.pageIndex}}</a>
         }
     </nav>
+    }
+
 </main>

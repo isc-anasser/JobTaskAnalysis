@@ -1,7 +1,5 @@
-import { Injectable, resource, ResourceRef } from '@angular/core';
-import { Page, SurveyContent } from '../types';
-import { Route } from '@angular/router';
-import { PageComponent } from '../components/page/page.component';
+import { Injectable } from '@angular/core';
+import { Page, Responses, SurveyContent } from '../types';
 
 declare global {
   interface Window {
@@ -28,33 +26,49 @@ type NavObj = {
   pageIndex: number
 }
 
-function mapContentToPages(config:SurveyContent): Page[] {
-  const pages: Page[] = [];
-  for (let page of config.pages) {
-    if ("type" in page.content[0] && page.content[0].type === "JTA") {
-      for (let KSAGroup of page.content[0].ksaGroups) {
-        for (let KSA of KSAGroup.ksas) {
-          const newPage: Page = {
-            title: `${KSAGroup.id} ${KSAGroup.text}`,
-            content: [KSA]
+function mapContentToPages(config: SurveyContent, examName: string): Page[] {
+  // let mappedPagesString = localStorage.getItem(examName);
+  // if (mappedPagesString) {
+  //   try {
+  //     return JSON.parse(mappedPagesString)
+  //   } catch (error) {
+  //     //console.error(error)
+  //     return setUpPages(config)
+  //   }
+  // }
+  return setUpPages(config)
+  function setUpPages(config: SurveyContent) {
+    const pages: Page[] = [];
+    for (let page of config.pages) {
+      if ("type" in page.content[0] && page.content[0].type === "JTA") {
+        for (let KSAGroup of page.content[0].ksaGroups) {
+          for (let KSA of KSAGroup.ksas) {
+            const newPage: Page = {
+              title: `${KSAGroup.id}. ${KSAGroup.text}`,
+              pageNum: pages.length,
+              content: [KSA]
+            }
+            pages.push(newPage)
           }
-          pages.push(newPage)
+          //We empty the KSAs array because its content is no longer needed and we don't want the KSAs to be copied into the responses object which will add overhead when serialized into JSON on submission
+          KSAGroup.ksas.length = 0
+          const newPage: Page = {
+            title: `Comment for: ${KSAGroup.text}`,
+            pageNum: pages.length,
+            content: [KSAGroup]
+          };
+          pages.push(newPage);
         }
-        const newPage: Page = {
-          title: `Comment for KSA Group ${KSAGroup.id}`,
-          content: [KSAGroup]
-        };
-        pages.push(newPage);
+      } else {
+        pages.push(page)
       }
-    } else {
-      pages.push(page)
     }
+    return pages
   }
-  return pages
+
 }
 
-function setUpNavLinks(surveyUrl: string, array: Page[]):NavObj[] {
-  console.log(array)
+function setUpNavLinks(surveyUrl: string, array: Page[]): NavObj[] {
   const output = [];
   for (let [index, _] of array.entries()) {
     output.push({
@@ -73,20 +87,27 @@ export class SurveyContentService {
   constructor() { }
   private config = window.JTA_CONFIG;
 
+  examName = this.config.examName
 
   getConfig() {
     return this.config
   }
-  // readonly surveyContent = resource({
-  //   request: () => "true",
-  //   loader: async () => {
-  //     let response = await fetch(`${window.JTA_CONFIG.url}/jtacontent`)
-  //     return 'hello'
-  //   }
-  // })
 
- 
+  getResponses() {
+    let localResponses = localStorage.getItem(this.examName);
+    if (localResponses) {
+      try {
+        return JSON.parse(localResponses)
+      } catch (error) {
+        //console.error(error)
+        return {jta:{}, mc: {}, comment: {}, ksaComment: {}}
+      }
+    }
+    return {jta:{}, mc: {}, comment: {}, ksaComment: {}}
+  }
 
-  mappedPagesArray = mapContentToPages(this.config);
+  responses: Responses = this.getResponses()
+
+  mappedPagesArray = mapContentToPages(this.config, this.examName);
   navLinks = setUpNavLinks(this.config.url, this.mappedPagesArray);
 }

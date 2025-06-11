@@ -1,4 +1,4 @@
-<h3>{{ksaObj().id + " " + ksaObj().text}}</h3>
+<h3>{{KSAGroupID() + "." + ksaObj().id + ". " + ksaObj().text}}</h3>
 <p>Tasks:</p>
 <!-- <table>
     <tr>
@@ -22,7 +22,7 @@
         </tr>
     }
 </table> -->
-<table>
+<!-- <table>
     <tr>
         <th>Topic</th>
         <th>Applicability</th>
@@ -31,7 +31,21 @@
         <th>Frequency</th>
     </tr>
     @for (targetItem of ksaObj().tis; track $index) {
-        <tr cert-jta-row [targetItem]="targetItem"></tr>
+    <tr cert-jta-row [targetItem]="targetItem"></tr>
     }
-    
-</table>
+
+</table> -->
+
+<div class="question-grid header">
+    <div>Topic</div>
+    <div>Applicability</div>
+    <div>Difficulty</div>
+    <div>Importance</div>
+    <div>Frequency</div>
+</div>
+
+
+@for (targetItem of ksaObj().tis; track $index) {
+<!-- <div cert-div-row-x [targetItem]="targetItem"></div> -->
+<div cert-row [targetItem]="targetItem" [ksaId]="`${KSAGroupID()}.${ksaObj().id}`"></div>
+}
