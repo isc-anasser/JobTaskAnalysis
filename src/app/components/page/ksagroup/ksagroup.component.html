@@ -1,5 +1,5 @@
 <fieldset>
-    <legend tabindex="0">Please include any missing content for this topics ({{characterLimit}} character limit):</legend>
+    <legend tabindex="0">Please include any comments you have for the topics in this section, including any content that you believe is missing ({{characterLimit}} character limit):</legend>
     <textarea (blur)="recordComment($event)" name="{{savedResponse().id}}" id="{{savedResponse().id}}" 
     rows="3" cols="75" spellcheck="true" [maxLength]="characterLimit">{{savedResponse().comment}}</textarea>
 </fieldset>

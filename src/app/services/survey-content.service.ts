@@ -53,7 +53,7 @@ function mapContentToPages(config: SurveyContent, examName: string): Page[] {
           //We empty the KSAs array because its content is no longer needed and we don't want the KSAs to be copied into the responses object which will add overhead when serialized into JSON on submission
           KSAGroup.ksas.length = 0
           const newPage: Page = {
-            title: `Comment for: ${KSAGroup.text}`,
+            title: `Comments for: ${KSAGroup.text}`,
             pageNum: pages.length,
             content: [KSAGroup]
           };
